@@ -1,0 +1,25 @@
+<div class="wrapper" [@showHide]="showState">
+  <form class="form">
+    <div class="form__container text-align--center">
+      <div class="form__heading">
+        <h3>Sign Up</h3>
+        <span>Become a member of Social Page!</span>
+      </div>
+      <div class="wrapper">
+        <mat-form-field class="form__input">
+          <input matInput placeholder="Name" type="text" name="name" required>
+        </mat-form-field>
+        <mat-form-field class="form__input">
+          <input matInput placeholder="Email" type="email" name="email" required>
+        </mat-form-field>
+        <mat-form-field class="form__input">
+          <input matInput placeholder="Password" type="password" name="password" required>
+        </mat-form-field>
+        <button class="full-width" type="submit" mat-raised-button color="primary">Sign up</button>
+        <div class="wrapper">
+          <button mat-button type="button" color="primary" (click)="toggle()">Already a member? Sign In</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

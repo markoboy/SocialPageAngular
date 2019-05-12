@@ -1,0 +1,34 @@
+<div class="wrapper" [@showHide]="showState">
+  <form class="form">
+    <div class="form__container text-align--center">
+      <div class="form__heading">
+        <h3>Sign In</h3>
+        <span>Join the community of Social Page!</span>
+      </div>
+      <div class="wrapper">
+        <mat-form-field class="form__input">
+          <input matInput
+                 placeholder="Email"
+                 type="email"
+                 name="email"
+                 required>
+        </mat-form-field>
+        <mat-form-field class="form__input">
+          <input matInput
+                 placeholder="Password"
+                 type="password"
+                 name="password"
+                 required>
+        </mat-form-field>
+        <div class="form__checkbox-container text-align--left">
+          <mat-checkbox color="primary">Remember me</mat-checkbox>
+          <a mat-button color="accent" routerLink="/">Forgot password?</a>
+        </div>
+        <button class="full-width" type="submit" mat-raised-button color="primary">Sign in</button>
+        <div class="wrapper">
+          <button mat-button color="primary" type="button" (click)="toggle()">Not a member? Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
