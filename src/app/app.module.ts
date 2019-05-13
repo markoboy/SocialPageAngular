@@ -14,6 +14,7 @@ import { MainHomeComponent } from './components/main-home/main-home.component';
 
 import { AnimationsService } from './services/animations.service';
 import { AuthService } from './services/auth.service';
+import { MainNewsComponent } from './components/main-news/main-news.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthService } from './services/auth.service';
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    MainHomeComponent
+    MainHomeComponent,
+    MainNewsComponent
   ],
   imports: [
     BrowserModule,

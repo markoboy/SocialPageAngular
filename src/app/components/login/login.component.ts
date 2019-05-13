@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AnimationsService } from 'src/app/services/animations.service';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUser } from 'src/app/models/IUser';
+
+import { AnimationsService } from 'src/app/services/animations.service';
 import { AuthService } from 'src/app/services/auth.service';
+
+import { IUser } from 'src/app/models/IUser';
 import { authErrorHandler } from 'src/app/helpers/error-handler';
 
 @Component({
@@ -40,7 +43,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   private submited: boolean;
   private errorMessage: string;
 
-  constructor(private animationsService: AnimationsService, private auth: AuthService) {
+  constructor(
+    private animationsService: AnimationsService,
+    private auth: AuthService,
+    private router: Router) {
     this.user = {
       email: '',
       password: ''
@@ -71,7 +77,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.auth.loginUser(this.user)
         .subscribe(
-          res => this.auth.saveToken(res.token),
+          res => {
+            this.auth.saveToken(res.token);
+            this.router.navigate(['/feeds']);
+          },
           err => {
             this.submited = false;
             this.errorMessage = authErrorHandler(err);

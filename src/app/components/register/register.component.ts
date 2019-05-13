@@ -6,6 +6,7 @@ import { AnimationsService } from 'src/app/services/animations.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { IUser } from 'src/app/models/IUser';
 import { authErrorHandler } from 'src/app/helpers/error-handler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -37,10 +38,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private show: boolean;
   private subscription: Subscription;
   private submited: boolean;
-  user: IUser;
+  private user: IUser;
   private errorMessage: string;
 
-  constructor(private animationsService: AnimationsService, private auth: AuthService) {
+  constructor(
+    private animationsService: AnimationsService,
+    private auth: AuthService,
+    private router: Router) {
     this.user = {
       name: '',
       email: '',
@@ -69,7 +73,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
       this.submited = true;
       this.auth.registerUser(this.user)
         .subscribe(
-          res => this.auth.saveToken(res.token),
+          res => {
+            this.auth.saveToken(res.token);
+            this.router.navigate(['/feeds']);
+          },
           err => {
             this.submited = false;
             this.errorMessage = authErrorHandler(err);

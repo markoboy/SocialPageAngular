@@ -2,7 +2,7 @@
   <mat-toolbar color="primary" class="header__nav">
     <a class="font-size--large" mat-button routerLink="/">Social Page</a>
     <span style="flex: 1 1 auto"></span>
-    <form class="header__form">
+    <form class="header__form" *ngIf="!auth.isAuthenticated">
       <label class="header__form__label">
         <span class="form__label__desc">Email:</span>
         <input  class="header__form__input"
@@ -20,5 +20,6 @@
       </label>
       <button type="submit" mat-button>Login</button>
     </form>
+    <button *ngIf="auth.isAuthenticated" mat-button (click)="logout()">Logout</button>
   </mat-toolbar>
 </header>
