@@ -4,12 +4,17 @@
 $color-primary: #3f51b5;
 $color-accent: #ff4081;
 $color-white: #fff;
+$color-error: #f00;
 
 html, body {
   height: 100%;
   padding: 0;
   margin: 0;
   overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .header {
@@ -53,6 +58,10 @@ html, body {
 
   &--white {
     color: $color-white;
+  }
+
+  &--red {
+    color: $color-error;
   }
 }
 
@@ -123,7 +132,6 @@ html, body {
   &__container {
     width: 350px;
     margin: 0 auto;
-    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.1);
     background-color: $color-white;
@@ -168,4 +176,10 @@ html, body {
 
 .is-top {
   z-index: 10;
+}
+
+.error-container {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  color: $color-error;
 }

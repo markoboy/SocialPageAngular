@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { AnimationsService } from 'src/app/services/animations.service';
 import { Subscription } from 'rxjs';
+import { IUser } from 'src/app/models/IUser';
+import { AuthService } from 'src/app/services/auth.service';
+import { authErrorHandler } from 'src/app/helpers/error-handler';
 
 @Component({
   selector: 'app-login',
@@ -32,8 +35,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private show: boolean;
   private subscription: Subscription;
+  private user: IUser;
+  private rememberUser: boolean;
+  private submited: boolean;
+  private errorMessage: string;
 
-  constructor(private animationsService: AnimationsService) { }
+  constructor(private animationsService: AnimationsService, private auth: AuthService) {
+    this.user = {
+      email: '',
+      password: ''
+    };
+  }
 
   ngOnInit() {
     this.subscription = this.animationsService.loginIsOpened.subscribe(isVisible => this.show = isVisible);
@@ -49,6 +61,22 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   toggle() {
     this.animationsService.toggleShowLogin();
+  }
+
+  login() {
+    if (!this.submited) {
+      this.submited = true;
+      this.errorMessage = '';
+      this.auth.rememberUser = this.rememberUser;
+
+      this.auth.loginUser(this.user)
+        .subscribe(
+          res => this.auth.saveToken(res.token),
+          err => {
+            this.submited = false;
+            this.errorMessage = authErrorHandler(err);
+          });
+    }
   }
 
 }

@@ -1,21 +1,43 @@
 <div class="wrapper" [@showHide]="showState">
-  <form class="form">
+  <form class="form" (ngSubmit)="register()" #registerForm="ngForm">
     <div class="form__container text-align--center">
       <div class="form__heading">
         <h3>Sign Up</h3>
         <span>Become a member of Social Page!</span>
       </div>
+      <div class="error-container" *ngIf="errorMessage">
+        <span>{{ errorMessage }}</span>
+      </div>
       <div class="wrapper">
         <mat-form-field class="form__input">
-          <input matInput placeholder="Name" type="text" name="name" required>
+          <input matInput
+                 placeholder="Name"
+                 [(ngModel)]="user.name"
+                 type="text"
+                 name="name"
+                 required>
         </mat-form-field>
         <mat-form-field class="form__input">
-          <input matInput placeholder="Email" type="email" name="email" required>
+          <input matInput
+                 placeholder="Email"
+                 [(ngModel)]="user.email"
+                 type="email"
+                 name="email"
+                 required>
         </mat-form-field>
         <mat-form-field class="form__input">
-          <input matInput placeholder="Password" type="password" name="password" required>
+          <input matInput
+                 placeholder="Password"
+                 [(ngModel)]="user.password"
+                 type="password"
+                 name="password"
+                 required>
         </mat-form-field>
-        <button class="full-width" type="submit" mat-raised-button color="primary">Sign up</button>
+        <button class="full-width"
+                type="submit"
+                mat-raised-button
+                [disabled]="!registerForm.form.valid || submited"
+                color="primary">Sign up</button>
         <div class="wrapper">
           <button mat-button type="button" color="primary" (click)="toggle()">Already a member? Sign In</button>
         </div>

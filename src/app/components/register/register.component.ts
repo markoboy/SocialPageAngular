@@ -1,7 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AnimationsService } from 'src/app/services/animations.service';
 import { Subscription } from 'rxjs';
+
+import { AnimationsService } from 'src/app/services/animations.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { IUser } from 'src/app/models/IUser';
+import { authErrorHandler } from 'src/app/helpers/error-handler';
 
 @Component({
   selector: 'app-register',
@@ -32,8 +36,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   private show: boolean;
   private subscription: Subscription;
+  private submited: boolean;
+  user: IUser;
+  private errorMessage: string;
 
-  constructor(private animationsService: AnimationsService) { }
+  constructor(private animationsService: AnimationsService, private auth: AuthService) {
+    this.user = {
+      name: '',
+      email: '',
+      password: ''
+    };
+  }
 
   ngOnInit() {
     this.subscription = this.animationsService.loginIsOpened.subscribe(isVisible => this.show = !isVisible);
@@ -49,6 +62,19 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   toggle() {
     this.animationsService.toggleShowLogin();
+  }
+
+  register() {
+    if (!this.submited) {
+      this.submited = true;
+      this.auth.registerUser(this.user)
+        .subscribe(
+          res => this.auth.saveToken(res.token),
+          err => {
+            this.submited = false;
+            this.errorMessage = authErrorHandler(err);
+          });
+    }
   }
 
 }
