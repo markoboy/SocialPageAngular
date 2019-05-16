@@ -6,6 +6,8 @@ $color-accent: #ff4081;
 $color-white: #fff;
 $color-error: #f00;
 
+$wrapper-max-width: 1280px;
+
 html, body {
   height: 100%;
   padding: 0;
@@ -18,6 +20,12 @@ html, body {
 }
 
 .header {
+  background-color: $color-primary;
+
+  .wrapper {
+    padding: 0;
+  }
+
   &__nav {
     min-height: 100px;
   }
@@ -126,6 +134,8 @@ html, body {
 
 .wrapper {
   padding: 1rem 1.5rem;
+  margin: 0 auto;
+  max-width: $wrapper-max-width;
 }
 
 .form {
@@ -182,4 +192,9 @@ html, body {
   padding: 1rem 1.5rem;
   text-align: left;
   color: $color-error;
+}
+
+.section {
+  padding: 1rem 2rem;
+  background-color: $color-white;
 }

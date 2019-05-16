@@ -1,6 +1,6 @@
 export const authErrorHandler = (err: any) => {
   console.error(err);
-  if (err.status === 401 && err.error.message) {
+  if (/(401|400)/.test(err.status) && err.error.message) {
     return err.error.message;
   }
 

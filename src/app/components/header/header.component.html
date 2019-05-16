@@ -1,25 +1,27 @@
-<header>
-  <mat-toolbar color="primary" class="header__nav">
-    <a class="font-size--large" mat-button routerLink="/">Social Page</a>
-    <span style="flex: 1 1 auto"></span>
-    <form class="header__form" *ngIf="!auth.isAuthenticated">
-      <label class="header__form__label">
-        <span class="form__label__desc">Email:</span>
-        <input  class="header__form__input"
-                type="email"
-                name="email"
-                required>
-      </label>
-      <label class="header__form__label">
-        <span class="form__label__desc">Password:</span>
-        <input  class="header__form__input"
-                type="password"
-                name="password"
-                required>
-        <a class="link color--white" routerLink="/">Forgot my password</a>
-      </label>
-      <button type="submit" mat-button>Login</button>
-    </form>
-    <button *ngIf="auth.isAuthenticated" mat-button (click)="logout()">Logout</button>
-  </mat-toolbar>
+<header class="header">
+  <nav class="wrapper">
+    <mat-toolbar color="primary" class="header__nav">
+      <a class="font-size--large" mat-button routerLink="/">Social Page</a>
+      <span style="flex: 1 1 auto"></span>
+      <form class="header__form" *ngIf="!auth.isAuthenticated">
+        <label class="header__form__label">
+          <span class="form__label__desc">Email:</span>
+          <input  class="header__form__input"
+                  type="email"
+                  name="email"
+                  required>
+        </label>
+        <label class="header__form__label">
+          <span class="form__label__desc">Password:</span>
+          <input  class="header__form__input"
+                  type="password"
+                  name="password"
+                  required>
+          <a class="link color--white" routerLink="/">Forgot my password</a>
+        </label>
+        <button type="submit" mat-button>Login</button>
+      </form>
+      <button *ngIf="auth.isAuthenticated" mat-button (click)="logout()">Logout</button>
+    </mat-toolbar>
+  </nav>
 </header>
